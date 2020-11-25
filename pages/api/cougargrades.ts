@@ -93,8 +93,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       .flat()
       // remove duplicates (see: https://stackoverflow.com/a/36744732)
       .filter((obj, index, self) => self.findIndex(t => t.id === obj.id) === index)
+      // remove blacklisted users (bots)
+      .filter(e => user_blacklist.findIndex(x => e.id === x.id) === -1)
       // remove public members, we only want non-member contributors
-      .filter(e => public_member_cache.includes(e.id))
+      .filter(e => !public_member_cache.includes(e.id))
   };
 
   // cache response for 7 days

@@ -1,3 +1,7 @@
+# github-org-stats
+
+![GitHub deployments](https://img.shields.io/github/deployments/au5ton/github-org-stats/Production?label=Deployment)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

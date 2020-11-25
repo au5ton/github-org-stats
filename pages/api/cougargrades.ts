@@ -99,6 +99,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   // cache response for 7 days
   res.setHeader('Cache-Control', 's-maxage=604800, stale-while-revalidate');
+  // cors stuff
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
   // return response
   return res.json(response);

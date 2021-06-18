@@ -2,6 +2,8 @@
 
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
+import _ from 'lodash'
+import { encodeImageToBlurhash, getRemoteImageBuffer } from '../../lib/blurhash'
 
 // the org in question
 const org = 'cougargrades';
@@ -20,6 +22,10 @@ const repository_whitelist = [
 const user_blacklist = [
   { id: 31427850, login: 'ImgBotApp' }
 ]
+
+const getBlurhash = _.memoize(async (avatar_url: string) => {
+  return await encodeImageToBlurhash(await getRemoteImageBuffer(avatar_url))
+})
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   // initialize
@@ -52,7 +58,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           name,
           login,
           html_url,
-          avatar_url
+          avatar_url,
+          avatar_blurhash: await getBlurhash(avatar_url)
         }
       })
     ),
@@ -73,7 +80,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 name: cache[login],
                 login,
                 html_url,
-                avatar_url
+                avatar_blurhash: await getBlurhash(avatar_url)
               }
             }
             else {
@@ -84,7 +91,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 name,
                 login,
                 html_url,
-                avatar_url
+                avatar_blurhash: await getBlurhash(avatar_url)
               }
             }
           }))

@@ -110,8 +110,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       .filter(e => !public_member_cache.includes(e.id))
   };
 
-  // cache response for 7 days
-  res.setHeader('Cache-Control', 's-maxage=604800, stale-while-revalidate');
+  // cache response for 1 day, SWR for 7 days
+  res.setHeader('Cache-Control', 'public, must-revalidate, max-age=86400, stale-while-revalidate=604800');
   // cors stuff
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');

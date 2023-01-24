@@ -75,8 +75,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     monthlyEstimatedSponsorsIncomeFormatted: `${(data.viewer.monthlyEstimatedSponsorsIncomeInCents / 100).toFixed(2)}`
   };
 
-  // cache response for 3 hours (10800, 7 days = 604800)
-  res.setHeader('Cache-Control', 's-maxage=10800, stale-while-revalidate');
+  // cache response for 3 hours, SWR for 1 day
+  res.setHeader('Cache-Control', 'public, must-revalidate, max-age=10800, stale-while-revalidate=86400');
   // cors stuff
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');

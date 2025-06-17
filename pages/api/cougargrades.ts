@@ -84,6 +84,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 name: cache[login],
                 login,
                 html_url,
+                avatar_url,
                 avatar_blurhash: await getBlurhash(avatar_url)
               }
             }
@@ -95,6 +96,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 name,
                 login,
                 html_url,
+                avatar_url,
                 avatar_blurhash: await getBlurhash(avatar_url)
               }
             }

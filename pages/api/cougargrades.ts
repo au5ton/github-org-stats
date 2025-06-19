@@ -113,8 +113,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   };
 
   // cache response for 1 day, SWR for 7 days
-  //res.setHeader('Cache-Control', 'public, must-revalidate, max-age=86400, stale-while-revalidate=604800');
-  res.setHeader('Cache-Control', 'private, must-revalidate, max-age=0');
+  res.setHeader('Cache-Control', 'public, must-revalidate, max-age=86400, stale-while-revalidate=604800');
+  //res.setHeader('Cache-Control', 'private, must-revalidate, max-age=0');
   // cors stuff
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
